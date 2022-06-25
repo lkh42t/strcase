@@ -6,7 +6,7 @@ import (
 	"unicode/utf8"
 )
 
-func splitToWords(s string) []string {
+func parse(s string) []string {
 	s = strings.TrimFunc(s, func(r rune) bool {
 		return !unicode.IsLetter(r) && !unicode.IsDigit(r)
 	})

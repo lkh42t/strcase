@@ -5,7 +5,7 @@ import "strings"
 
 // ToDelimited converts string to delimited.case in case delim = '.'.
 func ToDelimited(s string, delim rune) string {
-	words := splitToWords(s)
+	words := parse(s)
 	for i := 0; i < len(words); i++ {
 		words[i] = strings.ToLower(words[i])
 	}
@@ -24,7 +24,7 @@ func ToKebab(s string) string {
 
 // ToCamel converts string to camelCase.
 func ToCamel(s string) string {
-	words := splitToWords(s)
+	words := parse(s)
 
 	if len(words) == 1 {
 		return words[0]
@@ -46,7 +46,7 @@ func ToCamel(s string) string {
 
 // ToUpperCamel converts string to UpperCamelCase.
 func ToUpperCamel(s string) string {
-	words := splitToWords(s)
+	words := parse(s)
 
 	if len(words) == 1 {
 		return camelizeWord(words[0])

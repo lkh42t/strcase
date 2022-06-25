@@ -2,7 +2,7 @@ package strcase
 
 import "testing"
 
-func TestSplitToWords(t *testing.T) {
+func TestParse(t *testing.T) {
 	cases := []struct {
 		in   string
 		want []string
@@ -17,13 +17,13 @@ func TestSplitToWords(t *testing.T) {
 	}
 
 	for _, tt := range cases {
-		got := splitToWords(tt.in)
+		got := parse(tt.in)
 		if len(got) != len(tt.want) {
-			t.Fatalf("splitToWords(%v) => %v, want %v", tt.in, got, tt.want)
+			t.Fatalf("parse(%v) => %v, want %v", tt.in, got, tt.want)
 		}
 		for i, v := range got {
 			if v != tt.want[i] {
-				t.Fatalf("splitToWords(%v) => %v, want %v", tt.in, got, tt.want)
+				t.Fatalf("parse(%v) => %v, want %v", tt.in, got, tt.want)
 			}
 		}
 	}
