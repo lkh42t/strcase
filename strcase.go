@@ -45,42 +45,13 @@ func ToUpperKebab(s string) string {
 // ToCamel converts string to camelCase.
 func ToCamel(s string) string {
 	words := parse(s)
-
-	if len(words) == 1 {
-		return words[0]
+	for i := 1; i < len(words); i++ {
+		words[i] = camelize(words[i])
 	}
-
-	n := 0
-	for i := 0; i < len(words); i++ {
-		n += len(words[i])
-	}
-
-	var b strings.Builder
-	b.Grow(n)
-	b.WriteString(words[0])
-	for _, word := range words[1:] {
-		b.WriteString(camelizeWord(word))
-	}
-	return b.String()
+	return strings.Join(words, "")
 }
 
 // ToUpperCamel converts string to UpperCamelCase.
 func ToUpperCamel(s string) string {
-	words := parse(s)
-
-	if len(words) == 1 {
-		return camelizeWord(words[0])
-	}
-
-	n := 0
-	for i := 0; i < len(words); i++ {
-		n += len(words[i])
-	}
-
-	var b strings.Builder
-	b.Grow(n)
-	for _, word := range words {
-		b.WriteString(camelizeWord(word))
-	}
-	return b.String()
+	return mapJoin(s, "", camelize)
 }

@@ -29,7 +29,7 @@ func TestParse(t *testing.T) {
 	}
 }
 
-func TestCamelizeWord(t *testing.T) {
+func TestCamelize(t *testing.T) {
 	cases := []struct {
 		in   string
 		want string
@@ -40,9 +40,9 @@ func TestCamelizeWord(t *testing.T) {
 	}
 
 	for _, tt := range cases {
-		got := camelizeWord(tt.in)
+		got := camelize(tt.in)
 		if got != tt.want {
-			t.Fatalf("camelizeWord(%v) => %v, want %v", tt.in, got, tt.want)
+			t.Fatalf("camelize(%v) => %v, want %v", tt.in, got, tt.want)
 		}
 	}
 }

@@ -55,7 +55,7 @@ func mapJoin(s string, sep string, convert func(string) string) string {
 	return strings.Join(words, sep)
 }
 
-func camelizeWord(word string) string {
+func camelize(word string) string {
 	switch len(word) {
 	case 0:
 		return ""
@@ -63,14 +63,13 @@ func camelizeWord(word string) string {
 		return strings.ToUpper(word)
 	}
 
+	rs := []rune(word)
+
 	var b strings.Builder
 	b.Grow(len(word))
-	for i, r := range []rune(word) {
-		if i == 0 {
-			b.WriteRune(unicode.ToUpper(r))
-		} else {
-			b.WriteRune(unicode.ToLower(r))
-		}
+	b.WriteRune(unicode.ToUpper(rs[0]))
+	for _, r := range rs[1:] {
+		b.WriteRune(unicode.ToLower(r))
 	}
 	return b.String()
 }
