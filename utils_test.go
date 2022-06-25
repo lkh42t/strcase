@@ -17,13 +17,13 @@ func TestParse(t *testing.T) {
 	}
 
 	for _, tt := range cases {
-		got := parse(tt.in)
+		got := Parse(tt.in)
 		if len(got) != len(tt.want) {
-			t.Fatalf("parse(%v) => %v, want %v", tt.in, got, tt.want)
+			t.Fatalf("Parse(%v) => %v, want %v", tt.in, got, tt.want)
 		}
 		for i, v := range got {
 			if v != tt.want[i] {
-				t.Fatalf("parse(%v) => %v, want %v", tt.in, got, tt.want)
+				t.Fatalf("Parse(%v) => %v, want %v", tt.in, got, tt.want)
 			}
 		}
 	}

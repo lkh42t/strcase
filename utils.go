@@ -6,7 +6,11 @@ import (
 	"unicode/utf8"
 )
 
-func parse(s string) []string {
+// Parse splits string to words (e.g. FooBar => [Foo Bar]).
+//
+// This drops all non letters or digits.
+func Parse(s string) []string {
+	// Trim non letters or digits
 	s = strings.TrimFunc(s, func(r rune) bool {
 		return !unicode.IsLetter(r) && !unicode.IsDigit(r)
 	})
@@ -15,7 +19,7 @@ func parse(s string) []string {
 
 	start := 0
 	end := 0
-	runeWidth := 1
+	runeWidth := 1 // stores previous rune's width
 	consectiveUppers := 0
 	for i, r := range s {
 		if unicode.IsUpper(r) {
@@ -28,6 +32,11 @@ func parse(s string) []string {
 			end += runeWidth
 		} else if unicode.IsLetter(r) || unicode.IsDigit(r) {
 			if consectiveUppers > 1 {
+				// e.g. FOOBar
+				//      |  |`-current
+				//      |  `end
+				//      start
+				// In this case, we want to get FOO.
 				words = append(words, s[start:end-runeWidth])
 				start = end - runeWidth
 			}
