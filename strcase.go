@@ -3,23 +3,43 @@ package strcase
 
 import "strings"
 
-// ToDelimited converts string to delimited.case in case delim = '.'.
-func ToDelimited(s string, delim rune) string {
-	words := parse(s)
-	for i := 0; i < len(words); i++ {
-		words[i] = strings.ToLower(words[i])
-	}
-	return strings.Join(words, string(delim))
+var (
+	// ToDelimited is an alias for ToLowerDelimited.
+	ToDelimited = ToLowerDelimited
+	// ToSnake is an alias for ToLowerSnake.
+	ToSnake = ToLowerSnake
+	// ToKebab is an alias for ToLowerKebab.
+	ToKebab = ToLowerKebab
+)
+
+// ToLowerDelimited converts string to lower.delimited.case in case `sep = "."`.
+func ToLowerDelimited(s string, sep string) string {
+	return mapJoin(s, sep, strings.ToLower)
 }
 
-// ToSnake converts string to snake_case.
-func ToSnake(s string) string {
-	return ToDelimited(s, '_')
+// ToUpperDelimited converts string to UPPER.DELIMITED.CASE in case `sep = "."`.
+func ToUpperDelimited(s string, sep string) string {
+	return mapJoin(s, sep, strings.ToUpper)
 }
 
-// ToKebab converts string to kebab-case.
-func ToKebab(s string) string {
-	return ToDelimited(s, '-')
+// ToLowerSnake converts string to lower_snake_case.
+func ToLowerSnake(s string) string {
+	return ToLowerDelimited(s, "_")
+}
+
+// ToUpperSnake converts string to UPPER_SNAKE_CASE.
+func ToUpperSnake(s string) string {
+	return ToUpperDelimited(s, "_")
+}
+
+// ToLowerKebab converts string to lower-kebab-case.
+func ToLowerKebab(s string) string {
+	return ToLowerDelimited(s, "-")
+}
+
+// ToUpperKebab converts string to UPPER-KEBAB-CASE.
+func ToUpperKebab(s string) string {
+	return ToUpperDelimited(s, "-")
 }
 
 // ToCamel converts string to camelCase.

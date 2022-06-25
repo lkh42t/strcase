@@ -38,7 +38,6 @@ func parse(s string) []string {
 			if end-start != 0 {
 				words = append(words, s[start:end])
 				consectiveUppers = 0
-				start = end
 			}
 			runeWidth = utf8.RuneLen(r)
 			end += runeWidth
@@ -46,6 +45,14 @@ func parse(s string) []string {
 		}
 	}
 	return append(words, s[start:end])
+}
+
+func mapJoin(s string, sep string, convert func(string) string) string {
+	words := parse(s)
+	for i := 0; i < len(words); i++ {
+		words[i] = convert(words[i])
+	}
+	return strings.Join(words, sep)
 }
 
 func camelizeWord(word string) string {
