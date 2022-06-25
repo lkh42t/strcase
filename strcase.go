@@ -14,12 +14,12 @@ var (
 
 // ToLowerDelimited converts string to lower.delimited.case in case `sep = "."`.
 func ToLowerDelimited(s string, sep string) string {
-	return mapJoin(s, sep, strings.ToLower)
+	return mapJoin(parse(s), sep, strings.ToLower)
 }
 
 // ToUpperDelimited converts string to UPPER.DELIMITED.CASE in case `sep = "."`.
 func ToUpperDelimited(s string, sep string) string {
-	return mapJoin(s, sep, strings.ToUpper)
+	return mapJoin(parse(s), sep, strings.ToUpper)
 }
 
 // ToLowerSnake converts string to lower_snake_case.
@@ -53,5 +53,5 @@ func ToCamel(s string) string {
 
 // ToUpperCamel converts string to UpperCamelCase.
 func ToUpperCamel(s string) string {
-	return mapJoin(s, "", camelize)
+	return mapJoin(parse(s), "", camelize)
 }

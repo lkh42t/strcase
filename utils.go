@@ -47,8 +47,7 @@ func parse(s string) []string {
 	return append(words, s[start:end])
 }
 
-func mapJoin(s string, sep string, convert func(string) string) string {
-	words := parse(s)
+func mapJoin(words []string, sep string, convert func(string) string) string {
 	for i := 0; i < len(words); i++ {
 		words[i] = convert(words[i])
 	}
