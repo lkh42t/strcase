@@ -1,9 +1,9 @@
 # strcase
 
-strcase is a package to convert string case to another case (e.g. `snake_case` or `camelCase`).
+strcase is a package to convert string case to another (e.g. `snake_case` or `camelCase`).
 
 ## Install
 
 ```console
-go get -u github.com/lkh42t/strcase
+$ go get -u github.com/lkh42t/strcase
 ```
