@@ -5,7 +5,11 @@ import "strings"
 
 // ToDelimited converts string to delimited.case in case delim = '.'.
 func ToDelimited(s string, delim rune) string {
-	return strings.Join(splitToWords(s), string(delim))
+	words := splitToWords(s)
+	for i := 0; i < len(words); i++ {
+		words[i] = strings.ToLower(words[i])
+	}
+	return strings.Join(words, string(delim))
 }
 
 // ToSnake converts string to snake_case.

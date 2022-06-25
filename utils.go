@@ -20,7 +20,7 @@ func splitToWords(s string) []string {
 	for i, r := range s {
 		if unicode.IsUpper(r) {
 			if consectiveUppers == 0 && i != 0 {
-				words = append(words, strings.ToLower(s[start:end]))
+				words = append(words, s[start:end])
 				start = end
 			}
 			consectiveUppers++
@@ -28,7 +28,7 @@ func splitToWords(s string) []string {
 			end += runeWidth
 		} else if unicode.IsLetter(r) || unicode.IsDigit(r) {
 			if consectiveUppers > 1 {
-				words = append(words, strings.ToLower(s[start:end-runeWidth]))
+				words = append(words, s[start:end-runeWidth])
 				start = end - runeWidth
 			}
 			consectiveUppers = 0
@@ -36,7 +36,7 @@ func splitToWords(s string) []string {
 			end += runeWidth
 		} else {
 			if end-start != 0 {
-				words = append(words, strings.ToLower(s[start:end]))
+				words = append(words, s[start:end])
 				consectiveUppers = 0
 				start = end
 			}
@@ -45,7 +45,7 @@ func splitToWords(s string) []string {
 			start = end
 		}
 	}
-	return append(words, strings.ToLower(s[start:end]))
+	return append(words, s[start:end])
 }
 
 func camelizeWord(word string) string {
@@ -62,7 +62,7 @@ func camelizeWord(word string) string {
 		if i == 0 {
 			b.WriteRune(unicode.ToUpper(r))
 		} else {
-			b.WriteRune(r)
+			b.WriteRune(unicode.ToLower(r))
 		}
 	}
 	return b.String()

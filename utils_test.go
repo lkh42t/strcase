@@ -9,11 +9,11 @@ func TestSplitToWords(t *testing.T) {
 	}{
 		{in: "", want: []string{""}},
 		{in: "foo", want: []string{"foo"}},
-		{in: "fooBar", want: []string{"foo", "bar"}},
-		{in: "Foo-bar", want: []string{"foo", "bar"}},
-		{in: "userID", want: []string{"user", "id"}},
+		{in: "fooBar", want: []string{"foo", "Bar"}},
+		{in: "Foo-bar", want: []string{"Foo", "bar"}},
+		{in: "userID", want: []string{"user", "ID"}},
 		{in: "foo-_bar", want: []string{"foo", "bar"}},
-		{in: "FOOBar", want: []string{"foo", "bar"}},
+		{in: "FOOBar", want: []string{"FOO", "Bar"}},
 	}
 
 	for _, tt := range cases {
