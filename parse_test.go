@@ -15,6 +15,7 @@ func TestParse(t *testing.T) {
 		{in: "foo-_bar", want: []string{"foo", "bar"}},
 		{in: "FOOBar", want: []string{"FOO", "Bar"}},
 		{in: "Foo123bar", want: []string{"Foo", "123", "bar"}},
+		{in: "föo", want: []string{"föo"}},
 	}
 
 	for _, tt := range cases {
