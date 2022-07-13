@@ -40,7 +40,6 @@ func Parse(s string) []string {
 			consectiveUppers++
 			prevToken = tokenUpper
 			runeWidth = utf8.RuneLen(r)
-			end += runeWidth
 		case unicode.IsLower(r):
 			if prevToken == tokenUpper && consectiveUppers > 1 {
 				// e.g. FOOBar
@@ -57,7 +56,6 @@ func Parse(s string) []string {
 			consectiveUppers = 0
 			prevToken = tokenLower
 			runeWidth = utf8.RuneLen(r)
-			end += runeWidth
 		case unicode.IsDigit(r):
 			if prevToken != tokenDigit {
 				words = append(words, s[start:end])
@@ -66,7 +64,6 @@ func Parse(s string) []string {
 			consectiveUppers = 0
 			prevToken = tokenDigit
 			runeWidth = utf8.RuneLen(r)
-			end += runeWidth
 		default:
 			if end-start != 0 {
 				words = append(words, s[start:end])
@@ -74,9 +71,9 @@ func Parse(s string) []string {
 				prevToken = tokenLower
 			}
 			runeWidth = utf8.RuneLen(r)
-			end += runeWidth
-			start = end
+			start = end + runeWidth
 		}
+		end += runeWidth
 	}
 	return append(words, s[start:end])
 }
