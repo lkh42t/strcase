@@ -2,20 +2,20 @@ package strcase
 
 import "testing"
 
-func TestCamelize(t *testing.T) {
+func TestMapJoin(t *testing.T) {
 	cases := []struct {
-		in   string
-		want string
+		in  []string
+		out string
 	}{
-		{in: "", want: ""},
-		{in: "a", want: "A"},
-		{in: "foo", want: "Foo"},
+		{in: []string{}, out: ""},
+		{in: []string{"Foo"}, out: "Foo"},
+		{in: []string{"Foo", "bAr"}, out: "Foo.bAr"},
 	}
 
 	for _, tt := range cases {
-		got := camelize(tt.in)
-		if got != tt.want {
-			t.Fatalf("camelize(%v) => %v, want %v", tt.in, got, tt.want)
+		got := mapJoin(tt.in, ".", func(s string) string { return s })
+		if got != tt.out {
+			t.Fatalf("mapJoin(%v, \".\", strings.ToLower) => %v, want %v", tt.in, got, tt.out)
 		}
 	}
 }
