@@ -3,8 +3,9 @@ package strcase
 import "strings"
 
 func mapJoin(words []string, sep string, convert func(string) string) string {
-	for i := 0; i < len(words); i++ {
-		words[i] = convert(words[i])
+	slice := make([]string, 0, len(words))
+	for _, word := range words {
+		slice = append(slice, convert(word))
 	}
-	return strings.Join(words, sep)
+	return strings.Join(slice, sep)
 }
